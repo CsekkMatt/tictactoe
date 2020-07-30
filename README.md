@@ -1,7 +1,6 @@
 # ticktacktoe
 
-A new Flutter project.
-
+Flutter based tic tac toe application, implemented rules/minimax based bot algorithm.
 ## Getting Started
 
 This project is a starting point for a Flutter application.
