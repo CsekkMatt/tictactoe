@@ -65,8 +65,8 @@ class _HomePageState extends State<HomePage> {
             MiniMax(board: buttonList, humanPlayer: player1, aiPlayer: player2)
                 .getBestNextMove();
         print(DifficultyWidget().key.toString());
-        playGame(buttonList[bestMove]);
-        //autoPlay();
+        //playGame(buttonList[bestMove]);
+        autoPlay();
       }
     });
   }
@@ -126,6 +126,7 @@ class _HomePageState extends State<HomePage> {
     int nextMoveIndex = bot();
     if (nextMoveIndex == null) {
       nextMoveIndex = i;
+      print(nextMoveIndex);
     }
     playGame(buttonList[nextMoveIndex]);
   }
@@ -173,7 +174,6 @@ class _HomePageState extends State<HomePage> {
         return index;
       }
     }
-    return -2;
   }
 
   //return the winnerMove if exist
