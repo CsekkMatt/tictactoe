@@ -65,8 +65,8 @@ class _HomePageState extends State<HomePage> {
             MiniMax(board: buttonList, humanPlayer: player1, aiPlayer: player2)
                 .getBestNextMove();
         print(DifficultyWidget().key.toString());
-        //playGame(buttonList[bestMove]);
-        autoPlay();
+        playGame(buttonList[bestMove]);
+        //autoPlay();
       }
     });
   }
@@ -199,6 +199,7 @@ class _HomePageState extends State<HomePage> {
     return winnerMove;
   }
 
+  //TODO rewrite this check to verify with a simpliest way
   //return if the next move index it's OK
   bool nextMoveLogic(int index, List<GameButton> copyButtons) {
     if (index > 2 && index < 6) {
