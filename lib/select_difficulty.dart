@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class DifficultyWidget extends StatefulWidget {
-  DifficultyWidget({Key key}) : super(key: key);
+  DifficultyWidget({this.onSelectParameter});
+  Function(String) onSelectParameter;
 
   @override
   _SettingsWidgetState createState() => new _SettingsWidgetState();
 }
 
 class _SettingsWidgetState extends State<DifficultyWidget> {
-  List _difficulties = ["Minimax"];
-
-  List<DropdownMenuItem<String>> _dropDownMenuItems;
+  List _difficulties = ["Normal", "Minimax"];
   String _currentDifficulty;
+  List<DropdownMenuItem<String>> _dropDownMenuItems;
 
   @override
   void initState() {
@@ -21,7 +22,7 @@ class _SettingsWidgetState extends State<DifficultyWidget> {
   }
 
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
-    List<DropdownMenuItem<String>> items = new List();
+    List<DropdownMenuItem<String>> items = [];
     for (String city in _difficulties) {
       items.add(new DropdownMenuItem(value: city, child: new Text(city)));
     }
@@ -53,7 +54,9 @@ class _SettingsWidgetState extends State<DifficultyWidget> {
 
   void changedDropDownItem(String selectedDifficulty) {
     setState(() {
+      print(selectedDifficulty);
       _currentDifficulty = selectedDifficulty;
+      widget.onSelectParameter(selectedDifficulty);
     });
   }
 }

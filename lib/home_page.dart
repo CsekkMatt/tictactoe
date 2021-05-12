@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String mode;
   List<GameButton> buttonList;
   var player1;
   var player2;
@@ -29,8 +30,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<GameButton> doInit() {
-    player1 = new List();
-    player2 = new List();
+    player1 = [];
+    player2 = [];
     activePlayer = human;
     var gameButtons = <GameButton>[
       new GameButton(id: 0),
@@ -61,12 +62,17 @@ class _HomePageState extends State<HomePage> {
       }
       gb.enabled = false;
       if (!isGameEnd() && activePlayer == ai) {
-        int bestMove =
-            MiniMax(board: buttonList, humanPlayer: player1, aiPlayer: player2)
-                .getBestNextMove();
-        print(DifficultyWidget().key.toString());
-        playGame(buttonList[bestMove]);
-        //autoPlay();
+        if (mode == "Minimax") {
+          print('minimax move next');
+          int bestMove = MiniMax(
+                  board: buttonList, humanPlayer: player1, aiPlayer: player2)
+              .getBestNextMove();
+          print(DifficultyWidget().key.toString());
+          playGame(buttonList[bestMove]);
+        } else {
+          print('basic move next');
+          autoPlay();
+        }
       }
     });
   }
@@ -111,7 +117,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void autoPlay() {
-    var emptyCells = new List();
+    var emptyCells = [];
     var list = new List.generate(9, (i) => i + 1);
 
     for (var cellId in list) {
@@ -174,6 +180,7 @@ class _HomePageState extends State<HomePage> {
         return index;
       }
     }
+    return null;
   }
 
   //return the winnerMove if exist
@@ -303,7 +310,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            new DifficultyWidget(),
+            new DifficultyWidget(
+              onSelectParameter: (String param) {
+                setState(() {
+                  mode = param;
+                });
+              },
+            ),
             new RaisedButton(
               child: new Text(
                 "Reset",

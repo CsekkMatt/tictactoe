@@ -8,8 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Startup Name Generator',
-      theme: new ThemeData(primaryColor: Colors.black),
+      theme: new ThemeData(primaryColor: Colors.red),
       home: new HomePage(),
     );
   }
